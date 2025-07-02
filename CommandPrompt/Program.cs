@@ -77,9 +77,6 @@ class Program
 
             var newData = LoadDataset();
             _engine.Retrain(newData);
-
-            using var saveStream = File.Create(modelPath);
-            _engine.SaveModel(saveStream);
         }
     }
 
