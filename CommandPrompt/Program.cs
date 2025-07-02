@@ -1,4 +1,4 @@
-﻿using AIClassfierLib.Engine.Services;
+﻿using AIClassifierLib.Extensions;
 using AIClassifierLib.Interface;
 using AIClassifierLib.Models;
 class Program
@@ -14,10 +14,10 @@ class Program
     {
         _engine = engine;
     }
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         var dataset = LoadDataset();
-        using var engine = new ItemClassifierEngine(dataset, indAff, indDic);
+        var engine = await ServiceInitiatior.CreateAsync(dataset, modelPath, indAff, indDic);
 
         var app = new Program(engine);
         app.Run();
