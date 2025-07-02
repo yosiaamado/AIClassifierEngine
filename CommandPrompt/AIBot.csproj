@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AIClassifierLib\AIClassifierLib.csproj" />
-    <ProjectReference Include="..\ClassifierEngine\AIClassfierLib.Engine.csproj" />
   </ItemGroup>
 
   <ItemGroup>
