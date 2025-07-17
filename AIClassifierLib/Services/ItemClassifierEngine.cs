@@ -10,7 +10,7 @@ namespace AIClassfierLib.Services
     {
         private MLContext _mlContext;
         private ITransformer _model;
-        private PredictionEngine<ItemData, ItemPrediction> _predictor;
+        private PredictionEngine<ItemData, PredictionClass> _predictor;
         private Hunspell _spellChecker;
         private readonly SemaphoreSlim _initLock = new(1, 1);
         public bool IsInitialized => _initialized;
@@ -77,7 +77,7 @@ namespace AIClassfierLib.Services
                 .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedCategory"));
 
             _model = pipeline.Fit(data);
-            _predictor = _mlContext.Model.CreatePredictionEngine<ItemData, ItemPrediction>(_model);
+            _predictor = _mlContext.Model.CreatePredictionEngine<ItemData, PredictionClass>(_model);
         }
 
         private void SaveModel(Stream output)
@@ -90,7 +90,7 @@ namespace AIClassfierLib.Services
         {
             EnsureInitialized();
             _model = _mlContext.Model.Load(modelStream, out _);
-            _predictor = _mlContext.Model.CreatePredictionEngine<ItemData, ItemPrediction>(_model);
+            _predictor = _mlContext.Model.CreatePredictionEngine<ItemData, PredictionClass>(_model);
         }
 
         public string KBBISpelling(string word)

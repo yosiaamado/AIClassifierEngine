@@ -1,6 +1,7 @@
 ﻿using AIClassfierLib.Services;
 using AIClassifierLib.Interface;
 using AIClassifierLib.Models;
+using AIClassifierLib.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AIClassifierLib.Extensions
@@ -12,6 +13,13 @@ namespace AIClassifierLib.Extensions
             services.AddSingleton<IItemClassifierEngine, ItemClassifierEngine>();
             return services;
         }
+
+        public static IServiceCollection AddSuggestionEngine(this IServiceCollection services)
+        {
+            services.AddSingleton<IItemSuggestionEngine, ItemSuggestionEngine>();
+            return services;
+        }
+
         /// <summary>
         /// Use for Console App
         /// </summary>
